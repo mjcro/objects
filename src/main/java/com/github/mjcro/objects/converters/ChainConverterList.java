@@ -39,15 +39,4 @@ public class ChainConverterList implements Converter {
 
         throw new UnableToConvertException(context);
     }
-
-    public static void main(String[] args) {
-        ChainConverterList list = new ChainConverterList();
-        list.addLast(ConverterSame::new);
-        list.addLast(ConverterToString::new);
-        list.addLast(ConverterUnboxing::new);
-        list.addLast(ConverterStringNumbers::new);
-
-        System.out.println(list.convert("5", String.class));
-        System.out.println(list.convert("5", Long.class));
-    }
 }
