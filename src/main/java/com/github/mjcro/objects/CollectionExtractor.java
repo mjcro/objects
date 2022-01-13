@@ -34,13 +34,13 @@ public class CollectionExtractor {
      * @param separator Value separator, comma is used by default.
      * @param <T>       Collection type type.
      * @return Collection.
-     * @throws UnableToConvertException On conversion error.
+     * @throws ConversionException On conversion error.
      */
     public <T> List<T> toList(
             Object source,
             Class<T> target,
             CharSequence separator
-    ) throws UnableToConvertException {
+    ) throws ConversionException {
         return this.toList(new ConversionContext<>(source, target), separator);
     }
 
@@ -51,12 +51,12 @@ public class CollectionExtractor {
      * @param separator Value separator, comma is used by default.
      * @param <T>       Collection type type.
      * @return Collection.
-     * @throws UnableToConvertException On conversion error.
+     * @throws ConversionException On conversion error.
      */
     public <T> List<T> toList(
             ConversionContext<T> context,
             CharSequence separator
-    ) throws UnableToConvertException {
+    ) throws ConversionException {
         return (List<T>) this.toCollection(context, separator, ArrayList::new);
     }
 
@@ -68,13 +68,13 @@ public class CollectionExtractor {
      * @param separator Value separator, comma is used by default.
      * @param <T>       Collection type type.
      * @return Collection.
-     * @throws UnableToConvertException On conversion error.
+     * @throws ConversionException On conversion error.
      */
     public <T> Set<T> toSet(
             Object source,
             Class<T> target,
             CharSequence separator
-    ) throws UnableToConvertException {
+    ) throws ConversionException {
         return this.toSet(new ConversionContext<>(source, target), separator);
     }
 
@@ -85,12 +85,12 @@ public class CollectionExtractor {
      * @param separator Value separator, comma is used by default.
      * @param <T>       Collection type type.
      * @return Collection.
-     * @throws UnableToConvertException On conversion error.
+     * @throws ConversionException On conversion error.
      */
     public <T> Set<T> toSet(
             ConversionContext<T> context,
             CharSequence separator
-    ) throws UnableToConvertException {
+    ) throws ConversionException {
         return (Set<T>) this.toCollection(context, separator, LinkedHashSet::new);
     }
 
@@ -103,14 +103,14 @@ public class CollectionExtractor {
      * @param factory   Collection factory, reference to it's constructor in most cases.
      * @param <T>       Collection item type.
      * @return Collection.
-     * @throws UnableToConvertException On conversion error.
+     * @throws ConversionException On conversion error.
      */
     public <T> Collection<T> toCollection(
             Object source,
             Class<T> target,
             CharSequence separator,
             Supplier<Collection<T>> factory
-    ) throws UnableToConvertException {
+    ) throws ConversionException {
         return this.toCollection(new ConversionContext<>(source, target), separator, factory);
     }
 
@@ -122,15 +122,15 @@ public class CollectionExtractor {
      * @param factory   Collection factory, reference to it's constructor in most cases.
      * @param <T>       Collection type type.
      * @return Collection.
-     * @throws UnableToConvertException On conversion error.
+     * @throws ConversionException On conversion error.
      */
     public <T> Collection<T> toCollection(
             ConversionContext<T> context,
             CharSequence separator,
             Supplier<Collection<T>> factory
-    ) throws UnableToConvertException {
+    ) throws ConversionException {
         if (context == null) {
-            throw new UnableToConvertException(null);
+            throw new ConversionException(null);
         }
         if (factory == null) {
             return toList(context, separator);

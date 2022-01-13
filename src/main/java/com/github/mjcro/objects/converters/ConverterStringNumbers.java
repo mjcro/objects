@@ -2,7 +2,7 @@ package com.github.mjcro.objects.converters;
 
 import com.github.mjcro.objects.ConversionContext;
 import com.github.mjcro.objects.Converter;
-import com.github.mjcro.objects.UnableToConvertException;
+import com.github.mjcro.objects.ConversionException;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -14,9 +14,9 @@ public class ConverterStringNumbers extends ConverterChainSupport {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T convert(ConversionContext<T> context) throws UnableToConvertException {
+    public <T> T convert(ConversionContext<T> context) throws ConversionException {
         if (context == null) {
-            throw new UnableToConvertException(null);
+            throw new ConversionException(null);
         }
 
         if (Number.class.isAssignableFrom(context.getTargetClass())
@@ -48,7 +48,7 @@ public class ConverterStringNumbers extends ConverterChainSupport {
                     return (T) Double.valueOf(value);
                 }
             } catch (Throwable error) {
-                throw new UnableToConvertException(context, error);
+                throw new ConversionException(context, error);
             }
         }
 

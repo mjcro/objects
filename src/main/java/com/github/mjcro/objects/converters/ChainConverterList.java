@@ -2,7 +2,7 @@ package com.github.mjcro.objects.converters;
 
 import com.github.mjcro.objects.ConversionContext;
 import com.github.mjcro.objects.Converter;
-import com.github.mjcro.objects.UnableToConvertException;
+import com.github.mjcro.objects.ConversionException;
 
 import java.util.LinkedList;
 import java.util.Objects;
@@ -29,7 +29,7 @@ public class ChainConverterList implements Converter {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T convert(ConversionContext<T> context) throws UnableToConvertException {
+    public <T> T convert(ConversionContext<T> context) throws ConversionException {
         for (Converter converter : converters) {
             Object result = converter.convert(context);
             if (result != ConverterStubbing.STUB) {
@@ -37,6 +37,6 @@ public class ChainConverterList implements Converter {
             }
         }
 
-        throw new UnableToConvertException(context);
+        throw new ConversionException(context);
     }
 }

@@ -42,9 +42,9 @@ public interface Converter {
      * @param context Conversion context.
      * @param <T>     Expected response type.
      * @return Converted value.
-     * @throws UnableToConvertException On conversion error.
+     * @throws ConversionException On conversion error.
      */
-    <T> T convert(ConversionContext<T> context) throws UnableToConvertException;
+    <T> T convert(ConversionContext<T> context) throws ConversionException;
 
     /**
      * Performs conversion of Object to requested class.
@@ -53,9 +53,9 @@ public interface Converter {
      * @param clazz  Requested class.
      * @param <T>    Expected response type.
      * @return Converted value.
-     * @throws UnableToConvertException On conversion error.
+     * @throws ConversionException On conversion error.
      */
-    default <T> T convert(Object source, Class<T> clazz) throws UnableToConvertException {
+    default <T> T convert(Object source, Class<T> clazz) throws ConversionException {
         return this.convert(new ConversionContext<>(source, clazz));
     }
 

@@ -2,7 +2,7 @@ package com.github.mjcro.objects.converters;
 
 import com.github.mjcro.objects.ConversionContext;
 import com.github.mjcro.objects.Converter;
-import com.github.mjcro.objects.UnableToConvertException;
+import com.github.mjcro.objects.ConversionException;
 
 abstract class ConverterChainSupport implements Converter {
     private final Converter next;
@@ -11,9 +11,9 @@ abstract class ConverterChainSupport implements Converter {
         this.next = next;
     }
 
-    <T> T next(ConversionContext<T> context) throws UnableToConvertException {
+    <T> T next(ConversionContext<T> context) throws ConversionException {
         if (this.next == null) {
-            throw new UnableToConvertException(context);
+            throw new ConversionException(context);
         }
 
         return this.next.convert(context);

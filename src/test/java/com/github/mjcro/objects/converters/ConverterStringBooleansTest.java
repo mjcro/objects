@@ -1,6 +1,6 @@
 package com.github.mjcro.objects.converters;
 
-import com.github.mjcro.objects.UnableToConvertException;
+import com.github.mjcro.objects.ConversionException;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -34,7 +34,7 @@ public class ConverterStringBooleansTest {
         };
     }
 
-    @Test(dependsOnMethods = "testConvert", dataProvider = "convertWithErrorDataProvider", expectedExceptions = UnableToConvertException.class)
+    @Test(dependsOnMethods = "testConvert", dataProvider = "convertWithErrorDataProvider", expectedExceptions = ConversionException.class)
     public void testConvertWithError(Object given) {
         new ConverterStringBooleans(null).convert(given, boolean.class);
     }

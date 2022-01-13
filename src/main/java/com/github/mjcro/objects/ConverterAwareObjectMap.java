@@ -19,7 +19,7 @@ public interface ConverterAwareObjectMap<K> extends ObjectMap<K> {
      */
     default <T> T get(K key, Class<T> clazz) {
         if (clazz == null) {
-            throw new UnableToConvertException();
+            throw new ConversionException();
         }
         Object value = get(key);
         if (value == null) {
@@ -28,7 +28,7 @@ public interface ConverterAwareObjectMap<K> extends ObjectMap<K> {
         return getConverter().convert(value, clazz);
     }
 
-    default <T> Collection<T> getCollection(K key, CharSequence separator, Class<T> clazz) throws UnableToConvertException {
+    default <T> Collection<T> getCollection(K key, CharSequence separator, Class<T> clazz) throws ConversionException {
         Object value = get(key);
         if (value == null) {
             return Collections.emptyList();

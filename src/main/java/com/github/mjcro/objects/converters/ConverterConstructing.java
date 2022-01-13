@@ -2,7 +2,7 @@ package com.github.mjcro.objects.converters;
 
 import com.github.mjcro.objects.ConversionContext;
 import com.github.mjcro.objects.Converter;
-import com.github.mjcro.objects.UnableToConvertException;
+import com.github.mjcro.objects.ConversionException;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -21,7 +21,7 @@ public class ConverterConstructing extends ConverterChainSupport {
     }
 
     @Override
-    public <T> T convert(ConversionContext<T> context) throws UnableToConvertException {
+    public <T> T convert(ConversionContext<T> context) throws ConversionException {
         try {
             Constructor<T> constructor = context.getTargetClass().getDeclaredConstructor(context.getSourceClass());
             constructor.setAccessible(true);
@@ -29,7 +29,7 @@ public class ConverterConstructing extends ConverterChainSupport {
         } catch (NoSuchMethodException e) {
             // It is expected
         } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
-            throw new UnableToConvertException(context, e);
+            throw new ConversionException(context, e);
         }
 
         return next(context);

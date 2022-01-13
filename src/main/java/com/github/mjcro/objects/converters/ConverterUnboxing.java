@@ -2,7 +2,7 @@ package com.github.mjcro.objects.converters;
 
 import com.github.mjcro.objects.ConversionContext;
 import com.github.mjcro.objects.Converter;
-import com.github.mjcro.objects.UnableToConvertException;
+import com.github.mjcro.objects.ConversionException;
 
 public class ConverterUnboxing extends ConverterChainSupport {
     public ConverterUnboxing(Converter next) {
@@ -11,9 +11,9 @@ public class ConverterUnboxing extends ConverterChainSupport {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T convert(ConversionContext<T> context) throws UnableToConvertException {
+    public <T> T convert(ConversionContext<T> context) throws ConversionException {
         if (context == null) {
-            throw new UnableToConvertException(null);
+            throw new ConversionException(null);
         }
         if (context.isTargetClass(boolean.class) && context.isSourceClass(Boolean.class)) {
             return (T) context.getSource();

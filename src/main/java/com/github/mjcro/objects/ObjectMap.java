@@ -85,9 +85,9 @@ public interface ObjectMap<K> {
      * @param clazz Expected response class.
      * @param <T>   Response type.
      * @return Converted value, nullable.
-     * @throws UnableToConvertException On conversion error.
+     * @throws ConversionException On conversion error.
      */
-    <T> T get(K key, Class<T> clazz) throws UnableToConvertException;
+    <T> T get(K key, Class<T> clazz) throws ConversionException;
 
     /**
      * Returns converted value from object map.
@@ -97,9 +97,9 @@ public interface ObjectMap<K> {
      * @param clazz     Expected response class.
      * @param <T>       Response type.
      * @return Collection of values.
-     * @throws UnableToConvertException On conversion error.
+     * @throws ConversionException On conversion error.
      */
-    <T> Collection<T> getCollection(K key, CharSequence separator, Class<T> clazz) throws UnableToConvertException;
+    <T> Collection<T> getCollection(K key, CharSequence separator, Class<T> clazz) throws ConversionException;
 
     /**
      * Returns converted value from object map.
@@ -108,9 +108,9 @@ public interface ObjectMap<K> {
      * @param clazz Expected response class.
      * @param <T>   Response type.
      * @return Converted value.
-     * @throws UnableToConvertException On conversion error.
+     * @throws ConversionException On conversion error.
      */
-    default <T> Optional<T> getOptional(K key, Class<T> clazz) throws UnableToConvertException {
+    default <T> Optional<T> getOptional(K key, Class<T> clazz) throws ConversionException {
         return Optional.ofNullable(get(key, clazz));
     }
 

@@ -2,7 +2,7 @@ package com.github.mjcro.objects.converters;
 
 import com.github.mjcro.objects.ConversionContext;
 import com.github.mjcro.objects.Converter;
-import com.github.mjcro.objects.UnableToConvertException;
+import com.github.mjcro.objects.ConversionException;
 
 import java.nio.charset.StandardCharsets;
 
@@ -13,9 +13,9 @@ public class ConverterToString extends ConverterChainSupport {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T convert(ConversionContext<T> context) throws UnableToConvertException {
+    public <T> T convert(ConversionContext<T> context) throws ConversionException {
         if (context == null) {
-            throw new UnableToConvertException(null);
+            throw new ConversionException(null);
         }
         if (context.isTargetClass(String.class)) {
             if (context.isSourceClass(byte[].class)) {
