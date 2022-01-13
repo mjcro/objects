@@ -1,0 +1,6 @@
+/.idea
+/target
+Foo.java
+*.class
+/*.txt
+/*.log
