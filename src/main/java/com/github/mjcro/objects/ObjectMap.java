@@ -1,5 +1,7 @@
 package com.github.mjcro.objects;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.Map;
@@ -150,6 +152,22 @@ public interface ObjectMap<K> {
 
     default Optional<Long> getLongOptional(K key) {
         return getOptional(key, Long.class);
+    }
+
+    default BigInteger getBigInteger(K key) {
+        return get(key, BigInteger.class);
+    }
+
+    default Optional<BigInteger> getBigIntegerOptional(K key) {
+        return getOptional(key, BigInteger.class);
+    }
+
+    default BigDecimal getBigDecimal(K key) {
+        return get(key, BigDecimal.class);
+    }
+
+    default Optional<BigDecimal> getBigDecimalOptional(K key) {
+        return getOptional(key, BigDecimal.class);
     }
 
     default Instant getUnixSecondsInstant(K key) {
