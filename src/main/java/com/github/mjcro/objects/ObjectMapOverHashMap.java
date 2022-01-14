@@ -5,6 +5,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Implementation of {@link ObjectMap} using {@link HashMap}
+ *
+ * @param <K> Key type.
+ */
 class ObjectMapOverHashMap<K> implements ConverterAwareObjectMap<K> {
     private final Converter converter;
     private final HashMap<K, Object> source;
