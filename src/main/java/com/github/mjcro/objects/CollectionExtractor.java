@@ -135,6 +135,14 @@ public class CollectionExtractor {
         if (factory == null) {
             return toList(context, separator);
         }
+        if (context.getSource() instanceof Mixed) {
+            // Delegating to mixed
+            Collection<T> collection = ((Mixed) context.getSource()).getCollection(separator, context.getTargetClass());
+            // Applying factory
+            Collection<T> result = factory.get();
+            result.addAll(collection);
+            return result;
+        }
         if (separator == null) {
             separator = ",";
         }

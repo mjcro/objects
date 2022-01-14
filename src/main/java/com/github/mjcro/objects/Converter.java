@@ -1,6 +1,7 @@
 package com.github.mjcro.objects;
 
 import com.github.mjcro.objects.converters.ConverterConstructing;
+import com.github.mjcro.objects.converters.ConverterMixed;
 import com.github.mjcro.objects.converters.ConverterSame;
 import com.github.mjcro.objects.converters.ConverterStringBooleans;
 import com.github.mjcro.objects.converters.ConverterStringNumbers;
@@ -21,12 +22,14 @@ public interface Converter {
      */
     static Converter standard() {
         return new ConverterSame(
-                new ConverterToString(
-                        new ConverterUnboxing(
-                                new ConverterStringBooleans(
-                                        new ConverterStringNumbers(
-                                                new ConverterConstructing(
-                                                        null
+                new ConverterMixed(
+                        new ConverterToString(
+                                new ConverterUnboxing(
+                                        new ConverterStringBooleans(
+                                                new ConverterStringNumbers(
+                                                        new ConverterConstructing(
+                                                                null
+                                                        )
                                                 )
                                         )
                                 )
