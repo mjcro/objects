@@ -58,4 +58,9 @@ class ObjectMapOverHashMap<K> implements ConverterAwareObjectMap<K> {
     public boolean containsKey(final K key) {
         return source.containsKey(key);
     }
+
+    @Override
+    public Map<K, Object> toMap() {
+        return new HashMap<>(source);
+    }
 }

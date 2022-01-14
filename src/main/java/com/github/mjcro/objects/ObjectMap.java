@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.Instant;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -122,6 +123,19 @@ public interface ObjectMap<K> {
      */
     default <T> Optional<T> getOptional(K key, Class<T> clazz) throws ConversionException {
         return Optional.ofNullable(get(key, clazz));
+    }
+
+    /**
+     * Constructs plain Java map from current object map.
+     *
+     * @return Map
+     */
+    default Map<K, Object> toMap() {
+        HashMap<K, Object> response = new HashMap<>();
+        for (final K k : keySet()) {
+            response.put(k, get(k));
+        }
+        return response;
     }
 
     default boolean getBool(K key) {
