@@ -1,8 +1,8 @@
 package com.github.mjcro.objects.converters;
 
 import com.github.mjcro.objects.ConversionContext;
-import com.github.mjcro.objects.Converter;
 import com.github.mjcro.objects.ConversionException;
+import com.github.mjcro.objects.Converter;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -19,7 +19,7 @@ public class ConverterStringNumbers extends ConverterChainSupport {
             throw new ConversionException(null);
         }
 
-        if (Number.class.isAssignableFrom(context.getTargetClass())
+        if (context.targetExtends(Number.class)
                 || context.isTargetClass(byte.class)
                 || context.isTargetClass(short.class)
                 || context.isTargetClass(int.class)

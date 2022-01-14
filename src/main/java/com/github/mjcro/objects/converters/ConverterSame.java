@@ -1,8 +1,8 @@
 package com.github.mjcro.objects.converters;
 
 import com.github.mjcro.objects.ConversionContext;
-import com.github.mjcro.objects.Converter;
 import com.github.mjcro.objects.ConversionException;
+import com.github.mjcro.objects.Converter;
 
 public class ConverterSame extends ConverterChainSupport {
     public ConverterSame(Converter next) {
@@ -16,7 +16,7 @@ public class ConverterSame extends ConverterChainSupport {
             throw new ConversionException(null);
         }
         if (context.getTargetClass() != null) {
-            if (context.getSourceClass() == context.getTargetClass() || context.getTargetClass().isAssignableFrom(context.getSourceClass())) {
+            if (context.getSourceClass() == context.getTargetClass() || context.sourceExtends(context.getTargetClass())) {
                 return (T) context.getSource();
             }
         }

@@ -60,6 +60,16 @@ public class ConversionContext<T> {
     }
 
     /**
+     * Return true if source class extends/implements given candidate.
+     *
+     * @param candidate Candidate to extend/implement.
+     * @return True if source class extends/implements given candidate, false otherwise.
+     */
+    public boolean sourceExtends(Class<?> candidate) {
+        return candidate.isAssignableFrom(sourceClass);
+    }
+
+    /**
      * @return Target class.
      */
     public Class<T> getTargetClass() {
@@ -74,6 +84,16 @@ public class ConversionContext<T> {
      */
     public boolean isTargetClass(Class<?> candidate) {
         return targetClass == candidate;
+    }
+
+    /**
+     * Return true if target class extends/implements given candidate.
+     *
+     * @param candidate Candidate to extend/implement.
+     * @return True if target class extends/implements given candidate, false otherwise.
+     */
+    public boolean targetExtends(Class<?> candidate) {
+        return candidate.isAssignableFrom(targetClass);
     }
 
     /**
