@@ -102,6 +102,16 @@ public interface ObjectMap<K> {
     <T> Collection<T> getCollection(K key, CharSequence separator, Class<T> clazz) throws ConversionException;
 
     /**
+     * Returns raw unconverted value from object map.
+     *
+     * @param key Map key.
+     * @return Raw object value wrapped in optional.
+     */
+    default Optional<Object> getOptional(K key) {
+        return Optional.ofNullable(get(key));
+    }
+
+    /**
      * Returns converted value from object map.
      *
      * @param key   Map jey.
