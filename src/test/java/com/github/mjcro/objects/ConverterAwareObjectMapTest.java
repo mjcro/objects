@@ -7,7 +7,9 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.Instant;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 
 public class ConverterAwareObjectMapTest {
 
@@ -65,6 +67,12 @@ public class ConverterAwareObjectMapTest {
         @Override
         public Object get(final String key) {
             return value;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        public <Z> ObjectMap<Z> map(final Function<Map.Entry<String, Object>, Map.Entry<Z, Object>> mapping) {
+            return (ObjectMap<Z>) this;
         }
     }
 }

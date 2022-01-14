@@ -3,11 +3,14 @@ package com.github.mjcro.objects;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.Instant;
+import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  * Defines collection of key-pair value where key may be arbitrary class whilst
@@ -78,6 +81,35 @@ public interface ObjectMap<K> {
      * @return Raw object value, nullable.
      */
     Object get(K key);
+
+    /**
+     * Maps current map into new representation using mapping function.
+     *
+     * @param mapping Mapping function that consumes map entry.
+     * @param <Z>     Resulting object map key type.
+     * @return New object map.
+     */
+    <Z> ObjectMap<Z> map(Function<Map.Entry<K, Object>, Map.Entry<Z, Object>> mapping);
+
+    /**
+     * Maps current map values into new representation using mapping function.
+     *
+     * @param mapping Mapping function that consumes value.
+     * @return New object map.
+     */
+    default ObjectMap<K> mapValues(Function<Object, Object> mapping) {
+        return map($entry -> new AbstractMap.SimpleImmutableEntry<>($entry.getKey(), mapping.apply($entry.getValue())));
+    }
+
+    /**
+     * Maps current map values into new representation using mapping function.
+     *
+     * @param mapping Mapping function that consumes key and value.
+     * @return New object map.
+     */
+    default ObjectMap<K> mapValues(BiFunction<K, Object, Object> mapping) {
+        return map($entry -> new AbstractMap.SimpleImmutableEntry<>($entry.getKey(), mapping.apply($entry.getKey(), $entry.getValue())));
+    }
 
     /**
      * Returns converted value from object map.

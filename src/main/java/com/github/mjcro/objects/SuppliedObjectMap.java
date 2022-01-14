@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -156,6 +157,11 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
     @Override
     public Converter getConverter() {
         return converter;
+    }
+
+    @Override
+    public <Z> ObjectMap<Z> map(Function<Map.Entry<K, Object>, Map.Entry<Z, Object>> mapping) {
+        throw new AssertionError("Unable to map SuppliedObjectMap");
     }
 
     private static class Node {

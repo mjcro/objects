@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of {@link ObjectMap} using {@link HashMap}
@@ -62,5 +64,15 @@ class ObjectMapOverHashMap<K> implements ConverterAwareObjectMap<K> {
     @Override
     public Map<K, Object> toMap() {
         return new HashMap<>(source);
+    }
+
+    @Override
+    public <Z> ObjectMap<Z> map(Function<Map.Entry<K, Object>, Map.Entry<Z, Object>> mapping) {
+        return of(
+                converter,
+                source.entrySet().stream()
+                        .map(mapping)
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+        );
     }
 }

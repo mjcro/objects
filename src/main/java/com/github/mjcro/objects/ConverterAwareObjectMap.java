@@ -9,14 +9,7 @@ public interface ConverterAwareObjectMap<K> extends ObjectMap<K> {
      */
     Converter getConverter();
 
-    /**
-     * Returns value from map converted to expected class.
-     *
-     * @param key   Map key.
-     * @param clazz Expected response class.
-     * @param <T>
-     * @return
-     */
+    @Override
     default <T> T get(K key, Class<T> clazz) {
         if (clazz == null) {
             throw new ConversionException();
@@ -28,6 +21,7 @@ public interface ConverterAwareObjectMap<K> extends ObjectMap<K> {
         return getConverter().convert(value, clazz);
     }
 
+    @Override
     default <T> Collection<T> getCollection(K key, CharSequence separator, Class<T> clazz) throws ConversionException {
         Object value = get(key);
         if (value == null) {
