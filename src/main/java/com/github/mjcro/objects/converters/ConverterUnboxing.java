@@ -1,10 +1,17 @@
 package com.github.mjcro.objects.converters;
 
 import com.github.mjcro.objects.ConversionContext;
-import com.github.mjcro.objects.Converter;
 import com.github.mjcro.objects.ConversionException;
+import com.github.mjcro.objects.Converter;
 
+/**
+ * Provides unboxing support for primitives/
+ */
 public class ConverterUnboxing extends ConverterChainSupport {
+    public ConverterUnboxing() {
+        super(null);
+    }
+
     public ConverterUnboxing(Converter next) {
         super(next);
     }

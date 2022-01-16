@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class ConverterUnboxingTest {
     @Test
     public void testConverting() {
-        ConverterUnboxing converter = new ConverterUnboxing(null);
+        ConverterUnboxing converter = new ConverterUnboxing();
 
         Assert.assertEquals(converter.convert(true, boolean.class), true);
         Assert.assertEquals(converter.convert(false, boolean.class), false);
