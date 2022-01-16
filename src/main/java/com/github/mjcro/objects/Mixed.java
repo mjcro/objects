@@ -7,11 +7,33 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Function;
 
+/**
+ * Represents mixed data type, object that can hold anything, but
+ * also can convert its contents to requested type.
+ * <p>
+ * By contract, {@link Mixed} implementors must infer equals and hashCode implementation
+ * from its data content.
+ */
 public interface Mixed {
+    /**
+     * Wraps given object into mixed wrapper with standard {@link Converter}
+     * being embedded to it.
+     *
+     * @param value Value for mixed.
+     * @return Mixed wrapper.
+     */
     static Mixed wrap(Object value) {
         return wrap(null, value);
     }
 
+    /**
+     * Wraps given object with given converter into mixed wrapper.
+     *
+     * @param converter Converter to use. Optional, if null standard converter
+     *                  configuration will be applied.
+     * @param value     Value for mixed.
+     * @return Mixed wrapper.
+     */
     static Mixed wrap(Converter converter, Object value) {
         return MixedObject.of(
                 converter == null ? Converter.standard() : converter,
@@ -19,28 +41,71 @@ public interface Mixed {
         );
     }
 
+    /**
+     * @return Raw mixed value, nullable.
+     */
     Object get();
 
+    /**
+     * Converts mixed value into requested type.
+     *
+     * @param clazz Requested type class.
+     * @param <T>   Requested type.
+     * @return Converted value, nullable.
+     * @throws ConversionException On conversion error.
+     */
     <T> T get(Class<T> clazz) throws ConversionException;
 
+    /**
+     * Maps mixed value and produces new mixed that contains result.
+     *
+     * @param mapper Mapper function.
+     * @return Mixed with mapped value.
+     */
     Mixed map(Function<Object, Object> mapper);
 
-    default boolean isPresent() {
-        return getOptional().isPresent();
-    }
-
-    default boolean isEmpty() {
-        return !isPresent();
-    }
-
+    /**
+     * @return Raw value, wrapped in {@link Optional}.
+     */
     default Optional<Object> getOptional() {
         return Optional.ofNullable(get());
     }
 
+    /**
+     * @return True if mixed contains value.
+     */
+    default boolean isPresent() {
+        return getOptional().isPresent();
+    }
+
+    /**
+     * @return This if mixed contains null.
+     */
+    default boolean isEmpty() {
+        return !isPresent();
+    }
+
+    /**
+     * Converts mixed value into requested type.
+     *
+     * @param clazz Requested type class.
+     * @param <T>   Requested type.
+     * @return Converted value.
+     * @throws ConversionException On conversion error.
+     */
     default <T> Optional<T> getOptional(Class<T> clazz) throws ConversionException {
         return Optional.ofNullable(get(clazz));
     }
 
+    /**
+     * Returns mixed value as collection.
+     *
+     * @param separator Value separator.
+     * @param clazz     Expected response class.
+     * @param <T>       Response type.
+     * @return Collection of values.
+     * @throws ConversionException On conversion error.
+     */
     <T> Collection<T> getCollection(CharSequence separator, Class<T> clazz) throws ConversionException;
 
     default boolean getBool() {
