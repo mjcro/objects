@@ -22,6 +22,9 @@ public class ConverterConstructing extends ConverterChainSupport {
 
     @Override
     public <T> T convert(ConversionContext<T> context) throws ConversionException {
+        if (context == null) {
+            throw new ConversionException(null);
+        }
         try {
             Constructor<T> constructor = context.getTargetClass().getDeclaredConstructor(context.getSourceClass());
             constructor.setAccessible(true);
