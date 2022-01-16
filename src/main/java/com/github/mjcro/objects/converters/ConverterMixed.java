@@ -5,7 +5,15 @@ import com.github.mjcro.objects.ConversionException;
 import com.github.mjcro.objects.Converter;
 import com.github.mjcro.objects.Mixed;
 
+/**
+ * Converter that supports {@link Mixed} data type.
+ * I source object is {@link Mixed}, this converter will read it's value.
+ */
 public class ConverterMixed extends ConverterChainSupport {
+    public ConverterMixed() {
+        this(null);
+    }
+
     public ConverterMixed(Converter next) {
         super(next);
     }
