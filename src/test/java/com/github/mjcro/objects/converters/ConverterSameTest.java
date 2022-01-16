@@ -22,6 +22,6 @@ public class ConverterSameTest {
 
     @Test(dataProvider = "convertDataProvider")
     public void testConvert(Object object, Class<?> target) {
-        new ConverterSame(null).convert(object, target);
+        new ConverterSame().convert(object, target);
     }
 }
