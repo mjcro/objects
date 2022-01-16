@@ -1,10 +1,21 @@
 package com.github.mjcro.objects.converters;
 
 import com.github.mjcro.objects.ConversionContext;
-import com.github.mjcro.objects.Converter;
 import com.github.mjcro.objects.ConversionException;
+import com.github.mjcro.objects.Converter;
 
+/**
+ * Handles string representation of booleans.
+ * Works only with non-empty strings.
+ * <p>
+ * Will return `true` for "1" or "true" values (insensitive) and false for
+ * any other non-empty string.
+ */
 public class ConverterStringBooleans extends ConverterChainSupport {
+    public ConverterStringBooleans() {
+        this(null);
+    }
+
     public ConverterStringBooleans(Converter next) {
         super(next);
     }

@@ -21,7 +21,7 @@ public class ConverterToStringTest {
 
     @Test(dataProvider = "convertDataProvider")
     public void testConvert(Object given, String expected) {
-        Assert.assertEquals(new ConverterToString(null).convert(given, String.class), expected);
+        Assert.assertEquals(new ConverterToString().convert(given, String.class), expected);
     }
 
     private static class Custom {

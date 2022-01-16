@@ -7,7 +7,14 @@ import com.github.mjcro.objects.Converter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+/**
+ * Handles string representation of numbers.
+ */
 public class ConverterStringNumbers extends ConverterChainSupport {
+    public ConverterStringNumbers() {
+        super(null);
+    }
+
     public ConverterStringNumbers(Converter next) {
         super(next);
     }

@@ -1,12 +1,23 @@
 package com.github.mjcro.objects.converters;
 
 import com.github.mjcro.objects.ConversionContext;
-import com.github.mjcro.objects.Converter;
 import com.github.mjcro.objects.ConversionException;
+import com.github.mjcro.objects.Converter;
 
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Converts any non-null object to string.
+ * Internally invokes `toString` method.
+ * <p>
+ * Also supports byte arrays - any source byte array will be converted
+ * to string using UTF-8 character set.
+ */
 public class ConverterToString extends ConverterChainSupport {
+    public ConverterToString() {
+        super(null);
+    }
+
     public ConverterToString(Converter next) {
         super(next);
     }

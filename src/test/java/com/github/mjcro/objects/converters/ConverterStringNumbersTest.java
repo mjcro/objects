@@ -9,7 +9,7 @@ import java.math.BigInteger;
 public class ConverterStringNumbersTest {
     @Test
     public void testConvert() {
-        ConverterStringNumbers converter = new ConverterStringNumbers(null);
+        ConverterStringNumbers converter = new ConverterStringNumbers();
 
         Assert.assertEquals(converter.convert("-123", byte.class), (byte) -123);
         Assert.assertEquals(converter.convert("123", Byte.class), Byte.valueOf("123"));

@@ -22,7 +22,7 @@ public class ConverterStringBooleansTest {
 
     @Test(dataProvider = "convertDataProvider")
     public void testConvert(Object given, boolean expected) {
-        Assert.assertEquals(new ConverterStringBooleans(null).convert(given, boolean.class), expected);
+        Assert.assertEquals(new ConverterStringBooleans().convert(given, boolean.class), expected);
     }
 
     @DataProvider
@@ -36,6 +36,6 @@ public class ConverterStringBooleansTest {
 
     @Test(dependsOnMethods = "testConvert", dataProvider = "convertWithErrorDataProvider", expectedExceptions = ConversionException.class)
     public void testConvertWithError(Object given) {
-        new ConverterStringBooleans(null).convert(given, boolean.class);
+        new ConverterStringBooleans().convert(given, boolean.class);
     }
 }
