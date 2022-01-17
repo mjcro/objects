@@ -95,7 +95,7 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
     }
 
     /**
-     * Loads all values in parallel using given executor.
+     * Loads values in parallel using given executor.
      *
      * @param executor Executor to use.
      * @param keys     Value keys to load.
@@ -113,7 +113,16 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
     }
 
     /**
-     * Invalidated loaded values.
+     * Loads all values in parallel using given executor.
+     *
+     * @param executor Executor to use.
+     */
+    public void loadAll(Executor executor) {
+        load(executor, keySet());
+    }
+
+    /**
+     * Invalidates loaded values.
      * Next access to invalidated values will invoke corresponding suppliers.
      *
      * @param keys Value keys to invalidate.
@@ -127,6 +136,14 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
                 }
             }
         }
+    }
+
+    /**
+     * Invalidates all loaded values.
+     * Next access to invalidated values will invoke corresponding suppliers.
+     */
+    public void invalidateAll() {
+        invalidate(keySet());
     }
 
     @Override
