@@ -213,6 +213,17 @@ public interface ObjectMap<K> {
         return response;
     }
 
+    /**
+     * Constructs plain Java object using given object (bean) mapper.
+     *
+     * @param mapper Object mapper.
+     * @param <Z>    Expected response type.
+     * @return Mapped object.
+     */
+    default <Z> Z toObject(Function<ObjectMap<K>, Z> mapper) {
+        return mapper.apply(this);
+    }
+
     default boolean getBool(K key) {
         return get(key, boolean.class);
     }
