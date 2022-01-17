@@ -2,9 +2,13 @@ package com.github.mjcro.objects;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.util.AbstractMap;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -48,6 +52,45 @@ public interface ObjectMap<K> {
         return ObjectMapOverHashMap.of(
                 converter == null ? Converter.standard() : converter,
                 source
+        );
+    }
+
+    /**
+     * Wraps given map into {@link ObjectMap} with standard {@link Converter}
+     * being embedded to it.
+     *
+     * @param source Source ResultSet
+     * @return Object map.
+     */
+    static ObjectMap<String> ofResultSet(ResultSet source) throws SQLException {
+        return ofResultSet(null, source);
+    }
+
+    /**
+     * Wraps given map into {@link ObjectMap} with given {@link Converter}
+     * being embedded to it.
+     *
+     * @param converter Converter to use. Optional, if null standard converter
+     *                  configuration will be applied.
+     * @param source    Source ResultSet
+     * @return Object map.
+     */
+    static ObjectMap<String> ofResultSet(Converter converter, ResultSet source) throws SQLException {
+        Map<String, Object> data;
+        if (source == null || source.isAfterLast()) {
+            data = Collections.emptyMap();
+        } else {
+            ResultSetMetaData metaData = source.getMetaData();
+            int count = metaData.getColumnCount();
+            data = new HashMap<>(count);
+            for (int i = 1; i < count + 1; i++) {
+                data.put(metaData.getColumnLabel(i), source.getObject(i));
+            }
+        }
+
+        return ObjectMapOverHashMap.of(
+                converter == null ? Converter.standard() : converter,
+                data
         );
     }
 
