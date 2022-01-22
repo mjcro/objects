@@ -58,3 +58,28 @@ This library introduces two main abstractions:
 All implementation of abstractions above are thread safe and immutable.
 
 To help work with data conversion `Converter` interface with its implementations can be used 
+
+### Distribution
+
+Builds of this repository can be obtained from [JitPack](https://jitpack.io/#mjcro/objects).
+
+Add JitPack repository:
+
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
+
+Then add dependency:
+
+```xml
+<dependency>
+    <groupId>com.github.mjcro</groupId>
+    <artifactId>objects</artifactId>
+    <version><!-- Latest version --></version>
+</dependency>
+```
