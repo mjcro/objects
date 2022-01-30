@@ -6,13 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.time.Instant;
-import java.util.AbstractMap;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -164,6 +158,15 @@ public interface ObjectMap<K> {
      * @throws ConversionException On conversion error.
      */
     <T> T get(K key, Class<T> clazz) throws ConversionException;
+
+    /**
+     * Returns map value as {@link Mixed} object.
+     * By contract, should not return null, instead {@link Mixed} with null value will be produced.
+     *
+     * @param key Map key.
+     * @return Object map value as {@link Mixed}.
+     */
+    Mixed getMixed(K key);
 
     /**
      * Returns converted value from object map.

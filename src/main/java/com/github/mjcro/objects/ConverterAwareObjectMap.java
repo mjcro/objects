@@ -22,6 +22,11 @@ public interface ConverterAwareObjectMap<K> extends ObjectMap<K> {
     }
 
     @Override
+    default Mixed getMixed(K key) {
+        return Mixed.wrap(getConverter(), get(key));
+    }
+
+    @Override
     default <T> Collection<T> getCollection(K key, CharSequence separator, Class<T> clazz) throws ConversionException {
         Object value = get(key);
         if (value == null) {
