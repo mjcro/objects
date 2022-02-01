@@ -32,7 +32,7 @@ public class CollectionExtractor {
      * @param source    Source object.
      * @param target    Target collection's item class.
      * @param separator Value separator, comma is used by default.
-     * @param <T>       Collection type type.
+     * @param <T>       Collection type.
      * @return Collection.
      * @throws ConversionException On conversion error.
      */
@@ -49,7 +49,7 @@ public class CollectionExtractor {
      *
      * @param context   Conversion context.
      * @param separator Value separator, comma is used by default.
-     * @param <T>       Collection type type.
+     * @param <T>       Collection type.
      * @return Collection.
      * @throws ConversionException On conversion error.
      */
@@ -66,7 +66,7 @@ public class CollectionExtractor {
      * @param source    Source object.
      * @param target    Target collection's item class.
      * @param separator Value separator, comma is used by default.
-     * @param <T>       Collection type type.
+     * @param <T>       Collection type.
      * @return Collection.
      * @throws ConversionException On conversion error.
      */
@@ -83,7 +83,7 @@ public class CollectionExtractor {
      *
      * @param context   Conversion context.
      * @param separator Value separator, comma is used by default.
-     * @param <T>       Collection type type.
+     * @param <T>       Collection type.
      * @return Collection.
      * @throws ConversionException On conversion error.
      */
@@ -100,7 +100,7 @@ public class CollectionExtractor {
      * @param source    Source object.
      * @param target    Target collection's item class.
      * @param separator Value separator, comma is used by default.
-     * @param factory   Collection factory, reference to it's constructor in most cases.
+     * @param factory   Collection factory, reference to its constructor in most cases.
      * @param <T>       Collection item type.
      * @return Collection.
      * @throws ConversionException On conversion error.
@@ -119,8 +119,8 @@ public class CollectionExtractor {
      *
      * @param context   Conversion context.
      * @param separator Value separator, comma is used by default.
-     * @param factory   Collection factory, reference to it's constructor in most cases.
-     * @param <T>       Collection type type.
+     * @param factory   Collection factory, reference to its constructor in most cases.
+     * @param <T>       Collection type.
      * @return Collection.
      * @throws ConversionException On conversion error.
      */
