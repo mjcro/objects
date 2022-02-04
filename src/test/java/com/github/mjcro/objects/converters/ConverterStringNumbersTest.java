@@ -1,5 +1,6 @@
 package com.github.mjcro.objects.converters;
 
+import com.github.mjcro.objects.ConversionException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -31,5 +32,10 @@ public class ConverterStringNumbersTest {
 
         Assert.assertEquals(converter.convert("342", BigInteger.class), BigInteger.valueOf(342));
         Assert.assertEquals(converter.convert("-.342", BigDecimal.class), new BigDecimal("-.342"));
+    }
+
+    @Test(expectedExceptions = ConversionException.class)
+    public void testConvertInvalidNumber() {
+        new ConverterStringNumbers().convert("foo", int.class);
     }
 }

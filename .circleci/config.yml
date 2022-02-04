@@ -6,14 +6,14 @@ jobs:
       - image: circleci/openjdk:8-jdk-stretch
     steps:
       - checkout
-      - run: mvn test
+      - run: mvn verify
 
   jdk11:
     docker:
       - image: circleci/openjdk:11-jdk-stretch
     steps:
       - checkout
-      - run: mvn test
+      - run: mvn verify
 
 workflows:
   version: 2
