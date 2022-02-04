@@ -16,14 +16,8 @@ class ObjectMapOverHashMap<K> implements ConverterAwareObjectMap<K> {
     private final Converter converter;
     private final HashMap<K, Object> source;
 
-    @SuppressWarnings("unchecked")
     static <T> ObjectMapOverHashMap<T> of(Converter converter, Map<T, Object> source) {
-        return new ObjectMapOverHashMap<>(
-                converter,
-                source instanceof ObjectMapOverHashMap<?>
-                        ? ((ObjectMapOverHashMap<T>) source).source
-                        : source
-        );
+        return new ObjectMapOverHashMap<>(converter, source);
     }
 
     ObjectMapOverHashMap(Converter converter, Map<K, Object> source) {
