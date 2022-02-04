@@ -12,7 +12,7 @@ import java.math.BigInteger;
  */
 public class ConverterStringNumbers extends ConverterChainSupport {
     public ConverterStringNumbers() {
-        super(null);
+        this(null);
     }
 
     public ConverterStringNumbers(Converter next) {
