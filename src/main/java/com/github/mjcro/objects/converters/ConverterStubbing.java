@@ -1,6 +1,7 @@
 package com.github.mjcro.objects.converters;
 
 import com.github.mjcro.objects.ConversionContext;
+import com.github.mjcro.objects.ConversionException;
 import com.github.mjcro.objects.Converter;
 
 /**
@@ -17,6 +18,9 @@ public class ConverterStubbing implements Converter {
     @SuppressWarnings("unchecked")
     @Override
     public <T> T convert(ConversionContext<T> context) {
+        if (context == null) {
+            throw new ConversionException(null);
+        }
         return (T) STUB;
     }
 }
