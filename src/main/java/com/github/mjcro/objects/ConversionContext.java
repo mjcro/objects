@@ -26,16 +26,6 @@ public class ConversionContext<T> {
     }
 
     /**
-     * Applies given converter to current conversion context.
-     *
-     * @param converter Converter to use.
-     * @return Converted result.
-     */
-    public T convert(Converter converter) {
-        return converter.convert(this);
-    }
-
-    /**
      * @return Source object to convert.
      */
     public Object getSource() {
