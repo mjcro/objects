@@ -1,5 +1,8 @@
 package com.github.mjcro.objects.converters;
 
+import com.github.mjcro.objects.ConversionContext;
+import com.github.mjcro.objects.ConversionException;
+import com.github.mjcro.objects.Converter;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -20,6 +23,24 @@ public class ConverterConstructingTest {
         );
     }
 
+    @Test
+    public void testConstructingMissingBupass() {
+        Bar bar = new ConverterConstructing(new Converter() {
+            @SuppressWarnings("unchecked")
+            @Override
+            public <T> T convert(final ConversionContext<T> context) throws ConversionException {
+                return (T) new Bar(new Foo(321));
+            }
+        }).convert("Foo", Bar.class);
+
+        Assert.assertEquals(bar.foo.value, 321);
+    }
+
+    @Test(expectedExceptions = ConversionException.class)
+    public void testConstructingExceptionally() {
+        new ConverterConstructing().convert(true, Bar.class);
+    }
+
     private static class Foo {
         private final int value;
 
@@ -34,7 +55,11 @@ public class ConverterConstructingTest {
         private Bar(Foo foo) {
             this.foo = foo;
         }
-        
+
+        private Bar(Boolean bool) throws InstantiationException {
+            throw new InstantiationException();
+        }
+
         @Override
         public boolean equals(final Object obj) {
             return obj instanceof Bar && foo.value == ((Bar) obj).foo.value;
