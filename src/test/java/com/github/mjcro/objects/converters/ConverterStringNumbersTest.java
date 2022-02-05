@@ -38,4 +38,31 @@ public class ConverterStringNumbersTest {
     public void testConvertInvalidNumber() {
         new ConverterStringNumbers().convert("foo", int.class);
     }
+
+    @Test(expectedExceptions = ConversionException.class)
+    public void testCustomNumber() {
+        new ConverterStringNumbers().convert("foo", CustomNumber.class);
+    }
+
+    private static class CustomNumber extends Number {
+        @Override
+        public int intValue() {
+            return 0;
+        }
+
+        @Override
+        public long longValue() {
+            return 0;
+        }
+
+        @Override
+        public float floatValue() {
+            return 0;
+        }
+
+        @Override
+        public double doubleValue() {
+            return 0;
+        }
+    }
 }
