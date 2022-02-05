@@ -22,10 +22,8 @@ public class ConverterSame extends ConverterChainSupport {
         if (context == null) {
             throw new ConversionException(null);
         }
-        if (context.getTargetClass() != null) {
-            if (context.getSourceClass() == context.getTargetClass() || context.sourceExtends(context.getTargetClass())) {
-                return (T) context.getSource();
-            }
+        if (context.sourceExtends(context.getTargetClass())) {
+            return (T) context.getSource();
         }
         return next(context);
     }
