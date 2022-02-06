@@ -33,9 +33,20 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
      * @return Constructed object map.
      */
     public static <T> SuppliedObjectMap<T> build(Converter converter, Consumer<BiConsumer<T, Supplier<?>>> builder) {
-        SuppliedObjectMap<T> map = new SuppliedObjectMap<>(converter);
+        SuppliedObjectMap<T> map = new SuppliedObjectMap<>(converter == null ? Converter.standard() : converter);
         builder.accept(map::put);
         return map;
+    }
+
+    /**
+     * Constructs new supplied object map with default converter.
+     *
+     * @param builder Builder function.
+     * @param <T>     Key type.
+     * @return Constructed object map.
+     */
+    public static <T> SuppliedObjectMap<T> build(Consumer<BiConsumer<T, Supplier<?>>> builder) {
+        return build(Converter.standard(), builder);
     }
 
     /**
@@ -51,6 +62,17 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
     }
 
     /**
+     * Constructs new supplied object map with default converter.
+     *
+     * @param suppliers Suppliers map.
+     * @param <T>       Key type.
+     * @return Constructed object map.
+     */
+    public static <T> SuppliedObjectMap<T> of(Map<T, Supplier<?>> suppliers) {
+        return of(Converter.standard(), suppliers);
+    }
+
+    /**
      * Constructs new supplied object map.
      *
      * @param converter Converter to use. Optional, if null - standard converter will be used.
@@ -59,7 +81,7 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
      * @return Constructed object map.
      */
     public static <T> SuppliedObjectMap<T> ofEntries(Converter converter, Collection<Map.Entry<T, Supplier<?>>> suppliers) {
-        SuppliedObjectMap<T> map = new SuppliedObjectMap<>(converter);
+        SuppliedObjectMap<T> map = new SuppliedObjectMap<>(converter == null ? Converter.standard() : converter);
         for (Map.Entry<T, Supplier<?>> entry : suppliers) {
             map.put(entry.getKey(), entry.getValue());
         }
@@ -67,19 +89,23 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
     }
 
     /**
-     * Main constructor.
+     * Constructs new supplied object map with default converter.
      *
-     * @param converter Converter to use. Optional, if null - standard converter will be used.
+     * @param suppliers Suppliers collection.
+     * @param <T>       Key type.
+     * @return Constructed object map.
      */
-    protected SuppliedObjectMap(Converter converter) {
-        this.converter = converter == null ? Converter.standard() : converter;
+    public static <T> SuppliedObjectMap<T> ofEntries(Collection<Map.Entry<T, Supplier<?>>> suppliers) {
+        return ofEntries(Converter.standard(), suppliers);
     }
 
     /**
-     * Constructs supplied object map with standard converter.
+     * Main constructor.
+     *
+     * @param converter Converter to use, mandatory.
      */
-    protected SuppliedObjectMap() {
-        this(null);
+    protected SuppliedObjectMap(Converter converter) {
+        this.converter = Objects.requireNonNull(converter, "converter");
     }
 
     /**
@@ -178,7 +204,7 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
 
     @Override
     public <Z> ObjectMap<Z> map(Function<Map.Entry<K, Object>, Map.Entry<Z, Object>> mapping) {
-        throw new AssertionError("Unable to map SuppliedObjectMap");
+        throw new AssertionError("Unable to map " + getClass().getName());
     }
 
     private static class Node {
@@ -195,7 +221,7 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
             if (!initialized) {
                 try {
                     this.value = supplier.get();
-                } catch (Exception error) {
+                } catch (Throwable error) {
                     this.error = new RuntimeException(error);
                 } finally {
                     initialized = true;
