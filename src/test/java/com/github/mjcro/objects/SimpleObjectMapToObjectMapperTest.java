@@ -3,6 +3,7 @@ package com.github.mjcro.objects;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
 import java.util.HashMap;
 
 public class SimpleObjectMapToObjectMapperTest {
@@ -21,6 +22,11 @@ public class SimpleObjectMapToObjectMapperTest {
         Assert.assertEquals(foo.three, "-34");
     }
 
+    @Test(expectedExceptions = RuntimeException.class)
+    public void testReflectionException() {
+        ObjectMap.wrap(Collections.singletonMap("foo", "bar")).toObject(new SimpleObjectMapToObjectMapper<>(Forbidden.class));
+    }
+
     private static class Foo extends Bar {
         private long one;
         private String two;
@@ -28,5 +34,11 @@ public class SimpleObjectMapToObjectMapperTest {
 
     private static class Bar {
         protected String three;
+    }
+
+    private static class Forbidden {
+        public Forbidden() throws ReflectiveOperationException {
+            throw new ReflectiveOperationException();
+        }
     }
 }
