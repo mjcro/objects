@@ -9,6 +9,7 @@ public class NullContextTest {
     @DataProvider
     public Object[][] dataProviderFactories() {
         return new Object[][]{
+                {ChainConverterList.class},
                 {ConverterConstructing.class},
                 {ConverterMixed.class},
                 {ConverterSame.class},
