@@ -72,7 +72,7 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
      * @param converter Converter to use. Optional, if null - standard converter will be used.
      */
     protected SuppliedObjectMap(Converter converter) {
-        this.converter = converter == null ? Converter.standard() : converter;
+        this.converter = General.ensureConverter(converter);
     }
 
     /**

@@ -1,13 +1,5 @@
 package com.github.mjcro.objects;
 
-import com.github.mjcro.objects.converters.ConverterConstructing;
-import com.github.mjcro.objects.converters.ConverterMixed;
-import com.github.mjcro.objects.converters.ConverterSame;
-import com.github.mjcro.objects.converters.ConverterStringBooleans;
-import com.github.mjcro.objects.converters.ConverterStringNumbers;
-import com.github.mjcro.objects.converters.ConverterToString;
-import com.github.mjcro.objects.converters.ConverterUnboxing;
-
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -15,29 +7,6 @@ import java.util.function.Function;
  * Defines component that can convert Java Object to required class.
  */
 public interface Converter {
-    /**
-     * Constructs converter with standard ruleset.
-     *
-     * @return Converter
-     */
-    static Converter standard() {
-        return new ConverterSame(
-                new ConverterMixed(
-                        new ConverterToString(
-                                new ConverterUnboxing(
-                                        new ConverterStringBooleans(
-                                                new ConverterStringNumbers(
-                                                        new ConverterConstructing(
-                                                                null
-                                                        )
-                                                )
-                                        )
-                                )
-                        )
-                )
-        );
-    }
-
     /**
      * Performs conversion of Object to requested class.
      * All required data is stored inside ConversionContext object.

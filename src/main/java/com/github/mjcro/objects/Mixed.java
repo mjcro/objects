@@ -36,7 +36,7 @@ public interface Mixed {
      */
     static Mixed wrap(Converter converter, Object value) {
         return MixedObject.of(
-                converter == null ? Converter.standard() : converter,
+                General.ensureConverter(converter),
                 value
         );
     }

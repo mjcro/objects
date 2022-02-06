@@ -44,7 +44,7 @@ public interface ObjectMap<K> {
      */
     static <K> ObjectMap<K> wrap(Converter converter, Map<K, Object> source) {
         return ObjectMapOverHashMap.of(
-                converter == null ? Converter.standard() : converter,
+                General.ensureConverter(converter),
                 source
         );
     }
@@ -83,7 +83,7 @@ public interface ObjectMap<K> {
         }
 
         return ObjectMapOverHashMap.of(
-                converter == null ? Converter.standard() : converter,
+                General.ensureConverter(converter),
                 data
         );
     }

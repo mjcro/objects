@@ -83,7 +83,7 @@ public class ConverterTest {
 
     @Test(dataProvider = "standardDataProvider")
     public void testStandard(Object given, Object expected) {
-        Assert.assertEquals(Converter.standard().convert(given, expected.getClass()), expected);
+        Assert.assertEquals(General.CONVERTER.convert(given, expected.getClass()), expected);
     }
 
     @DataProvider
@@ -140,7 +140,7 @@ public class ConverterTest {
 
     @Test(dataProvider = "exceptionalStandardDataProvider", expectedExceptions = ConversionException.class)
     public void testStandardExceptions(Object given, Class<?> clazz) {
-        Converter.standard().convert(given, clazz);
+        General.CONVERTER.convert(given, clazz);
     }
 
     private static class Constructing {
