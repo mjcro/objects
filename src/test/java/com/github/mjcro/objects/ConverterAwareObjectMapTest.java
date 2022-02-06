@@ -41,7 +41,7 @@ public class ConverterAwareObjectMapTest {
 
         @Override
         public Converter getConverter() {
-            return Converter.standard();
+            return General.CONVERTER;
         }
 
         @Override

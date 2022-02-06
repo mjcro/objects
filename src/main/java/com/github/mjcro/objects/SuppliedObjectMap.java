@@ -105,7 +105,7 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
      * @param converter Converter to use, mandatory.
      */
     protected SuppliedObjectMap(Converter converter) {
-        this.converter = Objects.requireNonNull(converter, "converter");
+        this.converter = General.ensureConverter(converter);
     }
 
     /**

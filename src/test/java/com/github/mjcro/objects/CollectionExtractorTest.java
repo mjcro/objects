@@ -10,7 +10,7 @@ import java.util.Collection;
 public class CollectionExtractorTest {
     @Test
     public void testToCollectionRaw() {
-        Collection<Long> longs = new CollectionExtractor(Converter.standard()).toCollection(
+        Collection<Long> longs = new CollectionExtractor(General.CONVERTER).toCollection(
                 Arrays.asList(
                         "5",
                         6,
@@ -27,7 +27,7 @@ public class CollectionExtractorTest {
 
     @Test
     public void testToCollectionString() {
-        Collection<Long> longs = new CollectionExtractor(Converter.standard()).toCollection(
+        Collection<Long> longs = new CollectionExtractor(General.CONVERTER).toCollection(
                 "-3,80, 16",
                 Long.class,
                 null,
