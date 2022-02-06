@@ -19,13 +19,12 @@ public class SuppliedObjectMapTest {
         CountingSupplier cs1 = new CountingSupplier();
         CountingSupplier cs2 = new CountingSupplier();
 
-        Converter converter = Converter.standard();
-        SuppliedObjectMap<String> map = SuppliedObjectMap.build(converter, builder -> {
+        SuppliedObjectMap<String> map = SuppliedObjectMap.build(null, builder -> {
             builder.accept("cs1", cs1);
             builder.accept("cs2", cs2);
         });
 
-        Assert.assertSame(map.getConverter(), converter);
+        Assert.assertSame(map.getConverter(), General.CONVERTER);
         Assert.assertEquals(map.size(), 2);
         Assert.assertFalse(map.isEmpty());
         Assert.assertTrue(map.containsKey("cs2"));

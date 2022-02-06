@@ -21,7 +21,7 @@ import java.util.function.Function;
  */
 public interface ObjectMap<K> {
     /**
-     * Converts given map into {@link ObjectMap} with standard {@link Converter}
+     * Converts given map into {@link ObjectMap} with general {@link Converter}
      * being embedded to it.
      *
      * @param source Source map.
@@ -36,7 +36,7 @@ public interface ObjectMap<K> {
      * Wraps given map into {@link ObjectMap} with given {@link Converter}
      * being embedded to it.
      *
-     * @param converter Converter to use. Optional, if null standard converter
+     * @param converter Converter to use. Optional, if null - general converter
      *                  configuration will be applied.
      * @param source    Source map.
      * @param <K>       Key type.
@@ -50,7 +50,7 @@ public interface ObjectMap<K> {
     }
 
     /**
-     * Wraps given map into {@link ObjectMap} with standard {@link Converter}
+     * Wraps given map into {@link ObjectMap} with general {@link Converter}
      * being embedded to it.
      *
      * @param source Source ResultSet
@@ -64,7 +64,7 @@ public interface ObjectMap<K> {
      * Wraps given map into {@link ObjectMap} with given {@link Converter}
      * being embedded to it.
      *
-     * @param converter Converter to use. Optional, if null standard converter
+     * @param converter Converter to use. Optional, if null general converter
      *                  configuration will be applied.
      * @param source    Source ResultSet
      * @return Object map.

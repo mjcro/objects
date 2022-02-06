@@ -16,7 +16,7 @@ import java.util.function.Function;
  */
 public interface Mixed {
     /**
-     * Wraps given object into mixed wrapper with standard {@link Converter}
+     * Wraps given object into mixed wrapper with general {@link Converter}
      * being embedded to it.
      *
      * @param value Value for mixed.
@@ -29,7 +29,7 @@ public interface Mixed {
     /**
      * Wraps given object with given converter into mixed wrapper.
      *
-     * @param converter Converter to use. Optional, if null standard converter
+     * @param converter Converter to use. Optional, if null - general converter
      *                  configuration will be applied.
      * @param value     Value for mixed.
      * @return Mixed wrapper.

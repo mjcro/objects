@@ -27,13 +27,13 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
     /**
      * Constructs new supplied object map.
      *
-     * @param converter Converter to use. Optional, if null - standard converter will be used.
+     * @param converter Converter to use. Optional, if null - general converter will be used.
      * @param builder   Builder function.
      * @param <T>       Key type.
      * @return Constructed object map.
      */
     public static <T> SuppliedObjectMap<T> build(Converter converter, Consumer<BiConsumer<T, Supplier<?>>> builder) {
-        SuppliedObjectMap<T> map = new SuppliedObjectMap<>(converter == null ? Converter.standard() : converter);
+        SuppliedObjectMap<T> map = new SuppliedObjectMap<>(General.ensureConverter(converter));
         builder.accept(map::put);
         return map;
     }
@@ -46,13 +46,13 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
      * @return Constructed object map.
      */
     public static <T> SuppliedObjectMap<T> build(Consumer<BiConsumer<T, Supplier<?>>> builder) {
-        return build(Converter.standard(), builder);
+        return build(General.CONVERTER, builder);
     }
 
     /**
      * Constructs new supplied object map.
      *
-     * @param converter Converter to use. Optional, if null - standard converter will be used.
+     * @param converter Converter to use. Optional, if null - general converter will be used.
      * @param suppliers Suppliers map.
      * @param <T>       Key type.
      * @return Constructed object map.
@@ -69,19 +69,19 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
      * @return Constructed object map.
      */
     public static <T> SuppliedObjectMap<T> of(Map<T, Supplier<?>> suppliers) {
-        return of(Converter.standard(), suppliers);
+        return of(General.CONVERTER, suppliers);
     }
 
     /**
      * Constructs new supplied object map.
      *
-     * @param converter Converter to use. Optional, if null - standard converter will be used.
+     * @param converter Converter to use. Optional, if null - general converter will be used.
      * @param suppliers Suppliers collection.
      * @param <T>       Key type.
      * @return Constructed object map.
      */
     public static <T> SuppliedObjectMap<T> ofEntries(Converter converter, Collection<Map.Entry<T, Supplier<?>>> suppliers) {
-        SuppliedObjectMap<T> map = new SuppliedObjectMap<>(converter == null ? Converter.standard() : converter);
+        SuppliedObjectMap<T> map = new SuppliedObjectMap<>(General.ensureConverter(converter));
         for (Map.Entry<T, Supplier<?>> entry : suppliers) {
             map.put(entry.getKey(), entry.getValue());
         }
@@ -96,7 +96,7 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
      * @return Constructed object map.
      */
     public static <T> SuppliedObjectMap<T> ofEntries(Collection<Map.Entry<T, Supplier<?>>> suppliers) {
-        return ofEntries(Converter.standard(), suppliers);
+        return ofEntries(General.CONVERTER, suppliers);
     }
 
     /**
@@ -105,7 +105,14 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
      * @param converter Converter to use, mandatory.
      */
     protected SuppliedObjectMap(Converter converter) {
-        this.converter = General.ensureConverter(converter);
+        this.converter = Objects.requireNonNull(converter, "converter");
+    }
+
+    /**
+     * Main constructor that will use general converter.
+     */
+    protected SuppliedObjectMap() {
+        this.converter = General.CONVERTER;
     }
 
     /**

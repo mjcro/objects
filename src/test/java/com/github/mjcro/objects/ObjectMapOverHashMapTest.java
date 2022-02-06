@@ -17,9 +17,8 @@ public class ObjectMapOverHashMapTest {
         source.put("foo", 10);
         source.put("bar", true);
 
-        Converter converter = Converter.standard();
-        ObjectMapOverHashMap<String> wrapped = new ObjectMapOverHashMap<>(converter, source);
-        Assert.assertSame(wrapped.getConverter(), converter);
+        ObjectMapOverHashMap<String> wrapped = new ObjectMapOverHashMap<>(General.CONVERTER, source);
+        Assert.assertSame(wrapped.getConverter(), General.CONVERTER);
         Assert.assertEquals(wrapped.size(), source.size());
         Assert.assertFalse(wrapped.isEmpty());
         Assert.assertTrue(wrapped.containsKey("foo"));
@@ -46,8 +45,7 @@ public class ObjectMapOverHashMapTest {
 
     @Test
     public void testMapping() {
-        Converter converter = Converter.standard();
-        ObjectMapOverHashMap<String> src = ObjectMapOverHashMap.of(converter, Collections.singletonMap("foo", 11));
+        ObjectMapOverHashMap<String> src = ObjectMapOverHashMap.of(General.CONVERTER, Collections.singletonMap("foo", 11));
         ObjectMapOverHashMap<String> dst = (ObjectMapOverHashMap<String>) src.map($entry -> {
             if ($entry.getKey().equals("foo")) {
                 return new AbstractMap.SimpleEntry<>(
@@ -58,7 +56,7 @@ public class ObjectMapOverHashMapTest {
             throw new RuntimeException("Unexpected");
         });
 
-        Assert.assertSame(dst.getConverter(), converter);
+        Assert.assertSame(dst.getConverter(), General.CONVERTER);
         Assert.assertEquals(src.getInt("foo"), 11);
         Assert.assertEquals(dst.getInt("foo"), 33);
     }
