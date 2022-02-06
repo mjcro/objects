@@ -3,6 +3,7 @@ package com.github.mjcro.objects;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.AbstractMap;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
@@ -14,6 +15,39 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class SuppliedObjectMapTest {
+    @Test
+    public void testStaticConstructorBuild() {
+        SuppliedObjectMap<String> map = SuppliedObjectMap.build(null, $build -> $build.accept("foo", () -> "bar"));
+        Assert.assertSame(map.getConverter(), General.CONVERTER);
+        Assert.assertEquals(map.size(), 1);
+
+        map = SuppliedObjectMap.build($build -> $build.accept("foo", () -> "bar"));
+        Assert.assertSame(map.getConverter(), General.CONVERTER);
+        Assert.assertEquals(map.size(), 1);
+    }
+
+    @Test
+    public void testStaticConstructorOf() {
+        SuppliedObjectMap<String> map = SuppliedObjectMap.of(null, Collections.singletonMap("foo", () -> "bar"));
+        Assert.assertSame(map.getConverter(), General.CONVERTER);
+        Assert.assertEquals(map.size(), 1);
+
+        map = SuppliedObjectMap.of(Collections.singletonMap("foo", () -> "bar"));
+        Assert.assertSame(map.getConverter(), General.CONVERTER);
+        Assert.assertEquals(map.size(), 1);
+    }
+
+    @Test
+    public void testStaticConstructorOfEntries() {
+        SuppliedObjectMap<String> map = SuppliedObjectMap.ofEntries(null, Collections.singletonList(new AbstractMap.SimpleEntry<>("foo", () -> "bar")));
+        Assert.assertSame(map.getConverter(), General.CONVERTER);
+        Assert.assertEquals(map.size(), 1);
+
+        map = SuppliedObjectMap.ofEntries(Collections.singletonList(new AbstractMap.SimpleEntry<>("foo", () -> "bar")));
+        Assert.assertSame(map.getConverter(), General.CONVERTER);
+        Assert.assertEquals(map.size(), 1);
+    }
+
     @Test
     public void testDefault() {
         CountingSupplier cs1 = new CountingSupplier();
@@ -135,6 +169,14 @@ public class SuppliedObjectMapTest {
         ).get("foo");
     }
 
+    @Test
+    public void simpleExtend() {
+        SimpleExtendObjectMap map = new SimpleExtendObjectMap();
+
+        Assert.assertSame(map.getConverter(), General.CONVERTER);
+        Assert.assertEquals(map.getInt("foo"), 12345);
+    }
+
     private static class CountingSupplier implements Supplier<Object> {
         private final AtomicInteger i = new AtomicInteger();
 
@@ -142,6 +184,12 @@ public class SuppliedObjectMapTest {
         public Object get() {
             i.incrementAndGet();
             return "foo";
+        }
+    }
+
+    private static class SimpleExtendObjectMap extends SuppliedObjectMap<String> {
+        SimpleExtendObjectMap() {
+            put("foo", () -> 12345);
         }
     }
 }
