@@ -78,7 +78,7 @@ Then add dependency:
 
 ```xml
 <dependency>
-    <groupId>com.github.mjcro</groupId>
+    <groupId>io.github.mjcro</groupId>
     <artifactId>objects</artifactId>
     <version><!-- Latest version --></version>
 </dependency>
