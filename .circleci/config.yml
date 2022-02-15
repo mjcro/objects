@@ -17,7 +17,7 @@ jobs:
 
   jdk17:
     docker:
-      - image: circleci/openjdk:17-jdk-stretch
+      - image: circleci/openjdk:17-jdk-buster
     steps:
       - checkout
       - run: mvn test
