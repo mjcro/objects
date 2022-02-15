@@ -31,7 +31,7 @@ class ObjectMapOverHashMap<K> implements ConverterAwareObjectMap<K> {
     }
 
     @Override
-    public Object get(final K key) {
+    public Object get(K key) {
         return source.get(key);
     }
 
@@ -51,7 +51,7 @@ class ObjectMapOverHashMap<K> implements ConverterAwareObjectMap<K> {
     }
 
     @Override
-    public boolean containsKey(final K key) {
+    public boolean containsKey(K key) {
         return source.containsKey(key);
     }
 

@@ -210,7 +210,7 @@ public interface ObjectMap<K> {
      */
     default Map<K, Object> toMap() {
         HashMap<K, Object> response = new HashMap<>();
-        for (final K k : keySet()) {
+        for (K k : keySet()) {
             response.put(k, get(k));
         }
         return response;

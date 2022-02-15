@@ -136,7 +136,7 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
     public void load(Executor executor, Collection<K> keys) {
         Objects.requireNonNull(executor, "executor");
         if (keys != null && !keys.isEmpty()) {
-            for (final K key : keys) {
+            for (K key : keys) {
                 Node node = data.get(key);
                 if (node != null && !node.initialized) {
                     executor.execute(node::get);
@@ -162,7 +162,7 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
      */
     public void invalidate(Collection<K> keys) {
         if (keys != null && !keys.isEmpty()) {
-            for (final K key : keys) {
+            for (K key : keys) {
                 Node node = data.get(key);
                 if (node != null) {
                     node.invalidate();
@@ -195,12 +195,12 @@ public class SuppliedObjectMap<K> implements ConverterAwareObjectMap<K> {
     }
 
     @Override
-    public boolean containsKey(final K key) {
+    public boolean containsKey(K key) {
         return data.containsKey(key);
     }
 
     @Override
-    public Object get(final K key) {
+    public Object get(K key) {
         return data.get(key).get();
     }
 
