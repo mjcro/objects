@@ -78,6 +78,11 @@ public class ConverterTest {
                 // Constructed using constructor
                 {3865353L, new Constructing(3865353L)},
                 {"Hello, world", new Constructing("Hello, world")},
+
+                // Enums
+                {SimpleEnum.ONE_WAY, SimpleEnum.ONE_WAY},
+                {"OR", SimpleEnum.OR},
+                {"Another ", SimpleEnum.ANOTHER}
         };
     }
 
@@ -177,5 +182,9 @@ public class ConverterTest {
                     "value='" + value + '\'' +
                     '}';
         }
+    }
+
+    private enum SimpleEnum {
+        ONE_WAY, OR, ANOTHER;
     }
 }

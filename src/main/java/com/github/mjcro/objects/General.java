@@ -16,8 +16,10 @@ public class General {
                             new ConverterUnboxing(
                                     new ConverterStringBooleans(
                                             new ConverterStringNumbers(
-                                                    new ConverterConstructing(
-                                                            null
+                                                    new ConverterStringEnums(
+                                                            new ConverterConstructing(
+                                                                    null
+                                                            )
                                                     )
                                             )
                                     )

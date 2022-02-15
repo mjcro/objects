@@ -14,6 +14,7 @@ public class NullContextTest {
                 {ConverterMixed.class},
                 {ConverterSame.class},
                 {ConverterStringBooleans.class},
+                {ConverterStringEnums.class},
                 {ConverterStringNumbers.class},
                 {ConverterToString.class},
                 {ConverterUnboxing.class},
