@@ -61,7 +61,19 @@ To help work with data conversion `Converter` interface with its implementations
 
 ### Distribution
 
-Builds of this repository can be obtained from [JitPack](https://jitpack.io/#mjcro/objects).
+Builds are available on Maven Central
+
+```xml
+<dependency>
+    <groupId>io.github.mjcro</groupId>
+    <artifactId>objects</artifactId>
+    <version>2.0.0</version>
+</dependency>
+```
+
+### Alternative distribution
+
+Latest builds of this repository can be also obtained from [JitPack](https://jitpack.io/#mjcro/objects).
 
 Add JitPack repository:
 
