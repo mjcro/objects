@@ -1,9 +1,6 @@
 package io.github.mjcro.objects;
 
-import io.github.mjcro.objects.bencmarks.ConverterSameBench;
-import io.github.mjcro.objects.bencmarks.ConverterStringBooleansBench;
-import io.github.mjcro.objects.bencmarks.ConverterStringEnumsBench;
-import io.github.mjcro.objects.bencmarks.ConverterUnboxingBench;
+import io.github.mjcro.objects.bencmarks.*;
 import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
@@ -17,6 +14,8 @@ public class Benchmarks {
                 .include(ConverterStringBooleansBench.class.getSimpleName())
                 .include(ConverterUnboxingBench.class.getSimpleName())
                 .include(ConverterStringEnumsBench.class.getSimpleName())
+                .include(ConverterToStringBench.class.getSimpleName())
+                .include(ConvertersStringNumbersBench.class.getSimpleName())
                 .forks(1)
                 .warmupIterations(5)
                 .warmupTime(TimeValue.seconds(1))
