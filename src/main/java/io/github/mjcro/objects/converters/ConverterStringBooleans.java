@@ -26,7 +26,7 @@ public class ConverterStringBooleans extends ConverterChainSupport {
         if (context == null) {
             throw new ConversionException(null);
         }
-        if (context.isTargetClass(Boolean.class) || context.isTargetClass(boolean.class)) {
+        if (context.isTargetClass(Boolean.class, boolean.class)) {
             if (context.isSourceClass(String.class)) {
                 String value = context.getSource().toString().trim();
                 if (!value.isEmpty()) {
