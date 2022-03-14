@@ -22,6 +22,17 @@ public interface ParamSet extends Iterable<Param<?>> {
     }
 
     /**
+     * Creates new parameter collection from
+     * given collection of params.
+     *
+     * @param params Parameters collection.
+     * @return Parameter collection.
+     */
+    static ParamSet create(Iterable<Param<?>> params) {
+        return append(null, params);
+    }
+
+    /**
      * Constructs new parameter collection containing
      * data from original one plus new added param.
      *
@@ -51,7 +62,7 @@ public interface ParamSet extends Iterable<Param<?>> {
      * @return Parameter collection.
      */
     static ParamSet append(ParamSet origin, Iterable<Param<?>> params) {
-        ParamSet result = null;
+        ParamSet result = origin;
         for (Param<?> param : params) {
             result = append(result, param);
         }
@@ -88,4 +99,14 @@ public interface ParamSet extends Iterable<Param<?>> {
      * @return Stream over collection.
      */
     Stream<Param<?>> stream();
+
+    /**
+     * Performs compactification of param set collection,
+     * removing duplicates.
+     *
+     * @return Deduplicated collection.
+     */
+    default ParamSet compact() {
+        return append(null, this);
+    }
 }

@@ -40,6 +40,10 @@ public class ParamSetNestedTest {
                 set.stream().map(Param::getName).collect(Collectors.joining("&")),
                 "foo&bar"
         );
+
+        ParamSetNested compact = (ParamSetNested) set.compact();
+        Assert.assertEquals(compact.depth(), 2);
+        Assert.assertEquals(compact.size(), 2);
     }
 
     @Test(expectedExceptions = NoSuchElementException.class)
