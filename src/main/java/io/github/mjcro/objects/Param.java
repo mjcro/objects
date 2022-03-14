@@ -7,6 +7,7 @@ import java.util.function.Function;
 
 /**
  * Represents generic parameter with string name.
+ * Immutable.
  *
  * @param <T> Parameter type.
  */

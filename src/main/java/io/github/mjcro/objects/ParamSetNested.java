@@ -2,6 +2,7 @@ package io.github.mjcro.objects;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
@@ -37,7 +38,7 @@ public final class ParamSetNested implements ParamSet {
 
     @Override
     public Set<String> names() {
-        HashSet<String> result = new HashSet<>();
+        LinkedHashSet<String> result = new LinkedHashSet<>();
         ParamSetNested current = this;
         do {
             result.add(current.param.getName());
