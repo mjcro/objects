@@ -20,7 +20,17 @@ public interface Param<T> {
      * @return Created parameter.
      */
     static <T> Param<T> create(String name, T value) {
-        return null; // TODO
+        return value == null ? new ParamEmpty<>(name) : new ParamImpl<>(name, value);
+    }
+
+    /**
+     * Creates new parameter with no value.
+     *
+     * @param name Parameter name.
+     * @return Created parameter.
+     */
+    static Param<?> empty(String name) {
+        return new ParamEmpty<>(name);
     }
 
     /**
