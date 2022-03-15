@@ -67,7 +67,7 @@ Builds are available on Maven Central
 <dependency>
     <groupId>io.github.mjcro</groupId>
     <artifactId>objects</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.2</version>
 </dependency>
 ```
 
@@ -92,6 +92,6 @@ Then add dependency:
 <dependency>
     <groupId>io.github.mjcro</groupId>
     <artifactId>objects</artifactId>
-    <version><!-- Latest version --></version>
+    <version>2.0.2</version>
 </dependency>
 ```
