@@ -7,6 +7,15 @@ package io.github.mjcro.objects;
  */
 @FunctionalInterface
 public interface Decorator<T> {
+    /**
+     * Checks if given source object is decorator and if true - extracts
+     * its decoration target recursively.
+     * If false - returns source itself.
+     *
+     * @param source Source object.
+     * @param <X>    Decoration target type.
+     * @return Decoration root or source object.
+     */
     @SuppressWarnings("unchecked")
     static <X> X undecorate(X source) {
         if (source instanceof Decorator<?>) {
